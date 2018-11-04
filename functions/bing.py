@@ -36,17 +36,3 @@ def beautify(results):
 if __name__ == "__main__":
 	print(query("test"))
 
-
-
-
-#def beautify(results):
-#        resultsList = []
-#        resultsPretty = BeautifulSoup(results)
-##        topics = resultsPretty.findAll('div',{'id':'links'})[0]
-#        answers = topics.findAll('div',{'class': re.compile('results_*')})
-#        for answer in answers:
-#                #TODO: write a proper class for this to share on all the search engines
-#                cleanUrl = urllib2.unquote(answer.a['href'][15:])
-#                siteDescription = answer.a.text
-#                siteDetails = answer.findAll('a',{'class': re.compile('result__snippet')})[0].text
-
