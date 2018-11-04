@@ -3,6 +3,7 @@ import os
 import json
 from functions import duckduckgo
 import re
+import urllib2
 
 #This is a hardcoded query that will be a user input, the inurl & query tuning should be easier options to find or implicitly added
 rawSearchQuery = "free clinic massachusetts inurl:contact -animal"
@@ -23,7 +24,7 @@ def getDDG(query):
 		if phoneNumParse:
 			phoneNum = phoneNumParse.group(1)
 		#This outputs to the console, but it should respond with something more useful
-		print result["url"]+"\n"+result["answer"]+"\n"+phoneNum+"\n-------------\n"
+		print urllib2.unquote(result["url"])+"\n"+result["description"]+"\n"+result["details"]+"\n"+phoneNum+"\n-------------\n"
 
 
 

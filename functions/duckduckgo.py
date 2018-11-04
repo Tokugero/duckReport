@@ -1,8 +1,8 @@
-from bs4 import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 import requests
 import os
 import re
-import urllib
+import urllib2
 
 #https://duckduckgo.com/html/?q=valley+forge+national+park
 
@@ -21,7 +21,10 @@ def beautify(results):
 	answers = topics.findAll('div',{'class': re.compile('results_*')})
 	for answer in answers:
 		#TODO: write a proper class for this to share on all the search engines
-		resultObj = {"url":answer.a['href'][15:], "answer":answer.text}
+		cleanUrl = urllib2.unquote(answer.a['href'][15:])
+		siteDescription = answer.a.text
+		siteDetails = answer.findAll('a',{'class': re.compile('result__snippet')})[0].text
+		resultObj = {"url":cleanUrl, "description":siteDescription, "details":siteDetails, "answer":answer.text}
 		resultsList.append(resultObj)
 	return resultsList
 	
