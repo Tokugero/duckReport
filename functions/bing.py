@@ -19,14 +19,22 @@ def beautify(results):
 	resultsList = []
 	resultsPretty = BeautifulSoup(results)
 	for oltag in resultsPretty.findAll('ol', {'id': re.compile('b_results')}):
-		for litag in oltag.findAll('li'):
-			print(urllib2.unquote(litag.a['href']))
-			print(litag.a.text)
+		try:
+			for litag in oltag.findAll('li'):
+				cleanUrl = urllib2.unquote(litag.a['href'])
+				siteDetails = litag.a.text
+				siteDescription = litag.p.text
+				resultObj = {"url":cleanUrl, "description":siteDescription, "details":siteDetails, "answer":litag.text}
+				resultsList.append(resultObj)
+		except:
+			continue
+        return resultsList
+			
 
 
 
 if __name__ == "__main__":
-	query("test")
+	print(query("test"))
 
 
 
@@ -41,7 +49,4 @@ if __name__ == "__main__":
 #                cleanUrl = urllib2.unquote(answer.a['href'][15:])
 #                siteDescription = answer.a.text
 #                siteDetails = answer.findAll('a',{'class': re.compile('result__snippet')})[0].text
-#                resultObj = {"url":cleanUrl, "description":siteDescription, "details":siteDetails, "answer":answer.text}
-#                resultsList.append(resultObj)
-#        return resultsList
 
