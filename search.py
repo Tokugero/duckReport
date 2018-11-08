@@ -1,11 +1,11 @@
-#!/usr/bin/python
+#!bin/python3
 import os
 import json
 from functions import duckduckgo
 from functions import bing
 from functions import facebook
 import re
-import urllib2
+import urllib.request as urllib2
 
 #This is a hardcoded query that will be a user input, the inurl & query tuning should be easier options to find or implicitly added
 rawSearchQuery = "free clinic massachusetts"
@@ -34,7 +34,7 @@ def getDDG(query,inurl=[],exclude=[]):
 		if phoneNumParse:
 			phoneNum = phoneNumParse.group(1)
 		#This outputs to the console, but it should respond with something more useful
-		print "DuckDuckGo\n"+str(urllib2.unquote(result["url"]))+"\n"+result["description"]+"\n"+result["details"]+"\n"+phoneNum+"\n-------------\n"
+		print("DuckDuckGo\n"+str(urllib2.unquote(result["url"]))+"\n"+result["description"]+"\n"+result["details"]+"\n"+phoneNum+"\n-------------\n")
 
 def getBing(query,inurl=[],exclude=[]):
 	inurltext = ""
@@ -50,7 +50,7 @@ def getBing(query,inurl=[],exclude=[]):
 		phoneNumParse = re.search(rpattern, result["answer"])
 		if phoneNumParse:
 			phoneNum = phoneNumParse.group(1)
-		print "Bing\n"+str(urllib2.unquote(result["url"]))+"\n"+result["description"]+"\n"+result["details"]+"\n"+phoneNum+"\n-------------\n"
+		print("Bing\n"+str(urllib2.unquote(result["url"]))+"\n"+result["description"]+"\n"+result["details"]+"\n"+phoneNum+"\n-------------\n")
 	return
 
 def getFacebook():
@@ -68,7 +68,7 @@ def getFacebook():
 				about = result["about"]
 		except:
 			continue
-		print "Facebook\n"+result["link"]+"\n"+result["about"]+"\n"+description+"\n"+phoneNum+"\n---------------\n"
+		print("Facebook\n"+result["link"]+"\n"+result["about"]+"\n"+description+"\n"+phoneNum+"\n---------------\n")
 
 #add or remove desired search queries here:
 getDDG(searchQuery,inurl,exclude)

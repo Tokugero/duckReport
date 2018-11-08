@@ -1,9 +1,9 @@
 import re
 import requests
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup as bs 
 import json
 import os
-import urllib2
+import urllib.request as urllib2
 
 #https://www.bing.com/search?q=free+clinic+massachusetts&first=21
 
@@ -17,7 +17,7 @@ def query(searchQuery, firstResult = 1):
 
 def beautify(results):
 	resultsList = []
-	resultsPretty = BeautifulSoup(results)
+	resultsPretty = bs(results)
 	for oltag in resultsPretty.findAll('ol', {'id': re.compile('b_results')}):
 		try:
 			for litag in oltag.findAll('li'):
@@ -28,7 +28,7 @@ def beautify(results):
 				resultsList.append(resultObj)
 		except:
 			continue
-        return resultsList
+	return resultsList
 			
 
 

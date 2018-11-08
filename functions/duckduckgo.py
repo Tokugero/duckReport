@@ -1,8 +1,8 @@
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup as bs 
 import requests
 import os
 import re
-import urllib2
+import urllib.request as urllib2
 
 #https://duckduckgo.com/html/?q=valley+forge+national+park
 
@@ -16,7 +16,7 @@ def query(search):
 #Clean up the search results, they'll all be gobbledy html
 def beautify(results):
 	resultsList = []
-	resultsPretty = BeautifulSoup(results)
+	resultsPretty = bs(results)
 	topics = resultsPretty.findAll('div',{'id':'links'})[0]
 	answers = topics.findAll('div',{'class': re.compile('results_*')})
 	for answer in answers:
