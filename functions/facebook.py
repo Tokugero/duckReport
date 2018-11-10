@@ -9,7 +9,7 @@ from time import sleep
 fbId = os.environ["FACEBOOK_APP_ID"]
 fbSecret = os.environ["FACEBOOK_APP_SECRET"]
 
-def query(url = "", uri = "", nextUrl = "", distance = 160000, center ="42.1878631,-72.0148115"):
+def query(url = "", uri = "", nextUrl = "", distance = 1600000, center ="42.1878631,-72.0148115"):
     if not url:
         url = "https://graph.facebook.com/"
     if not uri:
